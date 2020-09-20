@@ -106,6 +106,7 @@ class Word2VecVectors:
         self.stemmer = PorterStemmer()
         self.lemmatizer = WordNetLemmatizer()
         self.tokenizer = word_tokenize
+        self.dim = None
         self.features = None
         self.model = None
     
@@ -130,9 +131,11 @@ class Word2VecVectors:
         
         print('Processed Data\n')
         
-    def make_model(self):
-        
-        self.model = Word2Vec(self.features, size=100, workers=4, window=10, iter=20)
+    def make_model(self, dim=None):
+        if dim == None:
+            dim = 100
+        self.dim = dim
+        self.model = Word2Vec(self.features, size=dim, workers=4, window=10, iter=20)
         print('Word2Vec model created.')
         
     def form_sentence_vector(self, sent):
@@ -143,7 +146,7 @@ class Word2VecVectors:
             try:
                 vector.append(self.model[word])
             except:
-                vector.append([0]*100)
+                vector.append([0]*self.dim)
         
         vec = np.array(vector).mean(axis=0) #average vector of the sentence
         
@@ -208,6 +211,7 @@ class FastTextVectors:
         self.stemmer = PorterStemmer()
         self.lemmatizer = WordNetLemmatizer()
         self.tokenizer = word_tokenize
+        self.dim = None
         self.features = None
         self.model = None
     
@@ -232,9 +236,13 @@ class FastTextVectors:
         
         print('Processed Data\n')
         
-    def make_model(self):
+    def make_model(self, dim=None):
         
-        self.model = FastText(sentences=self.features, size=100, workers=4, window=10, iter=20, min_count=5, sg=0)
+        if dim == None:
+            dim = 100
+        
+        self.dim = dim
+        self.model = FastText(sentences=self.features, size=dim, workers=4, window=10, iter=20, min_count=5, sg=0)
         print('FastText model created. Save with a .bin extension, use gensim.models.FastText.load("<model.bin>") to load the model')
         
     def form_sentence_vector(self, sent):
@@ -245,7 +253,7 @@ class FastTextVectors:
             try:
                 vector.append(self.model[word])
             except:
-                vector.append([0]*100)
+                vector.append([0]*self.dim)
         
         vec = np.array(vector).mean(axis=0) #average vector of the sentence
         

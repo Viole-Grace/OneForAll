@@ -128,7 +128,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -165,7 +165,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -204,12 +204,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -247,12 +247,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -292,12 +292,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding(vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -339,7 +339,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -374,7 +374,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -411,7 +411,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -450,12 +450,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -493,12 +493,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -538,12 +538,12 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embedding_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -591,6 +591,9 @@ class Binary:
         tokenizer = pickle.load(tokenizer_)
         tokenizer_.close()
         
+        self.data = text
+        self.clean_data()
+        text = self.data
         features = tokenizer.texts_to_sequences([text])
         padded_features = pad_sequences(features, maxlen=self.average_length, padding='post')
         
