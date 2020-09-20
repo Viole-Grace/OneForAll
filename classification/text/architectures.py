@@ -92,7 +92,7 @@ class Binary:
         ckpt = ModelCheckpoint(weight_file,
                                save_best_only=True,
                                save_weights_only=True,
-                               monitor='val_accuracy')
+                               monitor='val_acc')
         if epochs == None:
             epochs = 20
             
@@ -591,7 +591,7 @@ class Binary:
         tokenizer_.close()
         
         features = tokenizer.texts_to_sequences([text])
-        padded_features = pad_sequences(feature, maxlen=self.average_length, padding='post')
+        padded_features = pad_sequences(features, maxlen=self.average_length, padding='post')
         
         labels = loaded_model.predict(padded_features)
-        print(lables[0], labels)
+        print(labels[0])
