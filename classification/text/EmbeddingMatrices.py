@@ -47,7 +47,7 @@ class Word2VecEmbeddings:
         if iter == None:
             iter = 20
         
-        self.model = Word2Vec(self.features, size=dim, workers=4, window=win, iter=iter)
+        self.model = Word2Vec(self.features, size=dim, workers=4, window=win, iter=iter, min_count=0)
         print('{}D Word2Vec model created. Load using gensim.models.Word2Vec.load(<model name>.model)'.format(dim))
         
     def get_embeddings(self):
@@ -106,7 +106,7 @@ class FastTextEmbeddings:
         if sg == None:
             sg = 0
                     
-        self.model = FastText(sentences=self.features, size=dim, workers=4, window=win, iter=iter, min_count=5, sg=sg)
+        self.model = FastText(sentences=self.features, size=dim, workers=4, window=win, iter=iter, min_count=0, sg=sg)
         print('{}D FastText model created. Save with a .bin extension, use gensim.models.FastText.load("<model.bin>") to load the model'.format(dim))
         
     def get_embeddings(self):

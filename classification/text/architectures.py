@@ -11,6 +11,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 from statistics import median
 import pickle
+import re
 
 #Binary, MultiClass, MultiLabel -> All three should be made
 
@@ -97,7 +98,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding(vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -132,7 +133,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding (vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -169,7 +170,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding (vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -208,7 +209,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -222,7 +223,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
@@ -251,7 +252,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -267,7 +268,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
@@ -296,7 +297,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding(vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -314,7 +315,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
@@ -343,7 +344,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding(vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -378,7 +379,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding(vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -415,7 +416,7 @@ class Binary:
             epochs = 20
             
         if self.pretrained == True:
-            model.add(Embedding(input_dim = vocab_size, output_dim = embedding_size, weights=[pretrained_weights], trainable=False))
+            model.add(Embedding (vocab_size, output_dim = embedding_size, weights=[embedding_matrix], trainable=False))
         
         else:
             model.add(Embedding(self.vocab_size, self.nodes))
@@ -454,7 +455,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -468,7 +469,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
@@ -497,7 +498,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -513,7 +514,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
@@ -542,7 +543,7 @@ class Binary:
             epochs = 20
         
         if self.pretrained == True:
-            embed_layer = Embedding(input_dim = vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
+            embed_layer = Embedding (vocab_size, output_dim = embed_size, weights = [embedding_matrix], trainable=False)(orig_input)
         
         else:
             embed_layer = Embedding(self.vocab_size, self.nodes)(orig_input)
@@ -560,7 +561,7 @@ class Binary:
 
         model = Model(inputs=orig_input, outputs=prediction_layer)
         
-        print(model.summary)
+        print(model.summary())
         
         model.compile(optimizer=Adam(clipnorm=1.),
                       metrics=['accuracy'],
